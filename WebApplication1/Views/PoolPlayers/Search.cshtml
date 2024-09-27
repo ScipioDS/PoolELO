@@ -1,0 +1,17 @@
+﻿@model WebApplication1.Models.SearchPlayerModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search for player by name</h2>
+<hr />
+
+@using (Html.BeginForm("Search", "PoolPlayers"))
+{
+    <div class="d-flex flex-row align-baseline">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+        </div>
+        <button type="submit" class="btn bg-dark text-white" style="margin-left:20px;">Search</button>
+    </div>
+}

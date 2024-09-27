@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "AllGames";
+}
+<div class="d-flex flex-row justify-content-between">
+    <div>
+        <h2>All Games of Player</h2>
+    </div>
+    <div>
+        @Html.ActionLink("Back to leaderboard", "Index", "PoolPlayers", new {@class="btn btn-dark text-white"})
+    </div>
+</div>
+
+<hr />
+<div class="flex-column align-content-center">
+    @{
+        foreach (var item in ViewBag.Games)
+        {
+            if (item.Player1_id == Model.Id)
+            {
+                if (item.Winner == true)
+                {
+                    <div class="card text-white bg-success w-50" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player2_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="card text-white bg-danger w-50" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player2_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+            }
+            else
+            {
+                if (item.Winner != true)
+                {
+                    <div class="card text-white bg-success w-50" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player1_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="card text-white bg-danger w-50" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player1_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+            }
+        }
+    }
+</div>

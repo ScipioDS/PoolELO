@@ -1,0 +1,105 @@
+﻿@model WebApplication1.Models.PoolPlayer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <div class="d-flex flex-row justify-content-between">
+        <div>
+            <h4>Player Stats</h4>
+        </div>
+        <div>
+            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-dark text-white" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-dark text-white", @style = "margin-left:20px" })
+            }
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-dark text-white", @style = "margin-left:20px" })
+        </div>
+    </div>
+
+    <hr />
+    <div class="d-flex flex-row align-content-center">
+        <img src="@Model.Img" width="100px" height="100px" />
+        <div class="d-flex flex-column justify-content-center" style="padding-left:25px">
+            <h1>@Model.Name</h1>
+        </div>
+    </div>
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Elo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Elo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<h2 style="margin-bottom:20px">Last 5 Games:</h2>
+<div class="flex-column align-content-center">
+    @{
+        foreach (var item in ViewBag.Games)
+        {
+            if (item.Player1_id == Model.Id)
+            {
+                if (item.Winner == true)
+                {
+                    <div class="card text-white bg-success w-75" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player2_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="card text-white bg-danger w-75" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player2_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+            }
+            else
+            {
+                if (item.Winner != true)
+                {
+                    <div class="card text-white bg-success w-75" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player1_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="card text-white bg-danger w-75" style="margin-bottom:20px">
+                        <h3 class="card-title" style="margin: 10px">VS. @item.Player1_name</h3>
+                        <p class="card-text" style="margin: 10px; margin-top:0px">ID of game is: @item.Id</p>
+                    </div>
+                }
+            }
+        }
+    }
+</div>
+<h4>@Html.ActionLink("All of players games", "AllGames", new { id = Model.Id }, new { @class = "btn btn-dark text-white" })</h4>
+@if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+{
+    @Html.ActionLink("Add game to player", "CreateVia", "Games", new { id = Model.Id }, new { @class = "btn btn-dark text-white" })
+}

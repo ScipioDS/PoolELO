@@ -1,0 +1,38 @@
+﻿@model WebApplication1.Models.FilteredPlayersModel
+@{
+    ViewBag.Title = "Searched";
+}
+
+<h2>Searched</h2>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+    @foreach (var item in Model.poolPlayers)
+    {
+        <div class="card w-75" style="margin:25px">
+            <div class="card-body d-flex flex-row">
+                <div>
+                    <img src="@item.Img" alt="Image not found" width="200px" height="200px" class="rounded" />
+                </div>
+                <div style="margin-left:10px">
+                    <div class="d-flex flex-row justify-content-sm-between">
+                        <div>
+                            <h3 class="card-title">@item.Name</h3>
+                        </div>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "text-decoration-none btn btn-dark text-white" })
+                    </div>
+
+                    <h4>ELO: @item.Elo</h4>
+                    <p>@item.Description</p>
+                    <p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            Html.ActionLink("Edit", "Edit", new { id = item.Id });
+                            Html.ActionLink("Delete", "Delete", new { id = item.Id });
+                        }
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

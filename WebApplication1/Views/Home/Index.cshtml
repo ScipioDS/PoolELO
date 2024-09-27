@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main class="d-flex flex-row align-content-center">
+    <div class="">
+        <h1 id="title">PoolELO</h1>
+        <p class="lead w-75">PoolELO is a free online repository of pool players and their current rankings.</p>
+        <p class="w-75">
+            The Elo rating system is a method used to rank players in competitive games like chess. It assigns each player a numerical rating based on their skill level, which updates after every game. When two players compete, the system predicts the expected outcome based on their current ratings. If a higher-rated player wins, their rating increases slightly, while the lower-rated player's rating decreases. If the lower-rated player wins or draws, their rating increases significantly, while the higher-rated player's rating drops more.
+        </p><p class="w-75">
+            The amount of points gained or lost depends on the rating difference and the result. The system aims to accurately reflect a player's skill over time by adjusting ratings based on performance relative to expectations. Elo systems are widely used for ranking in many competitive fields, not just games.
+        </p>
+    </div>
+    <div class="d-flex flex-row align-content-around">
+        <div class="card" style="width:300px; margin:20px;">
+            <img class="card-img-top" src="@ViewBag.Player.Img" alt="No image found" width="300px" height="300px"></img>
+            <div class="card-body">
+                <h3 class="card-title">Current top-rated: @ViewBag.Player.Name</h3>
+                <p class="card-text">@ViewBag.Player.Description</p>
+            </div>
+        </div>
+        <div class="card" style="width:300px; margin:20px">
+            <img class="card-img-top" src="@ViewBag.LowestPlayer.Img" alt="No image found" width="300px" height="300px"></img>
+            <div class="card-body">
+                <h3 class="card-title">Current lowest-rated: @ViewBag.LowestPlayer.Name</h3>
+                <p class="card-text">@ViewBag.LowestPlayer.Description</p>
+            </div>
+        </div>
+    </div>
+</main>

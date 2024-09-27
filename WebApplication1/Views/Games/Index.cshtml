@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebApplication1.Models.Game>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Played Games on Site</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new {@class="btn btn-dark text-white"})
+</p>
+<table class="table" id="Table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Player1_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Player2_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Winner)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player1_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player2_id)
+            </td>
+            <td>
+                @{ 
+                    if(item.Winner.Equals(true))
+                {
+                        <p>
+                            No.1 Wins
+                        </p>
+                }
+                else
+                {
+                        <p>
+                            No.2 Wins
+                        </p>
+                }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Player1_name)
+                Vs.
+                @Html.DisplayFor(modelItem => item.Player2_name)
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Table').DataTable();
+        });
+    </script>
+    }
